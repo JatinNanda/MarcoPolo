@@ -6,9 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import marcopolo.marcopolo.GPSTracker;
-
-
+@Deprecated
 public class MapActivity extends ActionBarActivity {
 
     Button btnShowLocation;

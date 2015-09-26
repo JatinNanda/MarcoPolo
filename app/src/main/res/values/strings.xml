@@ -5,4 +5,5 @@
     <string name="title_smslayout">NewGroup</string>
     <string name="title_mapactivity">MapScreen</string>
     <string name="title_googleMaps">GoogleMaps</string>
+    <string name="title_joinactivity">JoinActivity</string>
 </resources>

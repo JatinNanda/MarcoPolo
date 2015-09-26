@@ -55,6 +55,8 @@ public class SMSActivity extends Activity implements OnClickListener{
 
             }
         }
+        startActivity(new Intent(getApplicationContext(), GoogleMaps.class));
+
     }
     public ArrayList<String> parseNumbers(String numbers) {
         SmsManager s = SmsManager.getDefault();

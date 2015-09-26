@@ -11,9 +11,10 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
-import android.util.Log;
 
-public class GPSTracker extends Service implements LocationListener{
+import com.google.android.gms.maps.LocationSource;
+
+public class GPSTracker extends Service implements LocationListener, LocationSource {
 
     private final Context context;
 
@@ -178,4 +179,13 @@ public class GPSTracker extends Service implements LocationListener{
         return null;
     }
 
+    @Override
+    public void activate(OnLocationChangedListener onLocationChangedListener) {
+
+    }
+
+    @Override
+    public void deactivate() {
+
+    }
 }

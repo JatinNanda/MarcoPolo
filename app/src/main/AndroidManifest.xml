@@ -34,6 +34,10 @@
             android:name=".MapActivity"
             android:label="@string/title_mapactivity" >
         </activity>
+        <activity
+            android:name=".JoinActivity"
+            android:label="@string/title_joinactivity" >
+        </activity>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
