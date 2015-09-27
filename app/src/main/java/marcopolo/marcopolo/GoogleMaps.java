@@ -1,5 +1,6 @@
 package marcopolo.marcopolo;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -31,35 +32,21 @@ public class GoogleMaps extends FragmentActivity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap map) {
-
-        //LatLng myLocation = new LatLng(GPSTracker.latitude, GPSTracker.longitude);
         List<LatLng> list = MainActivity.db.fetchLocations();
-        List<LatLng> visited = new ArrayList<LatLng>();
         int groupSize = MainActivity.db.findGroupSize();
-        while(visited.size() < groupSize) {
+        while(list.size() < groupSize) {
            list = MainActivity.db.fetchLocations();
-            for(LatLng l: list) {
-                if (!visited.contains(l)) {
-                    visited.add(l);
-                }
-            }
         }
 
         LatLng groupMeet = Database.findGroupLoc(list);
         map.addMarker(new MarkerOptions().position(groupMeet).title("Meeting point").icon(BitmapDescriptorFactory.
                 defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(groupMeet, 14.0f));
-        MainActivity.db.addDistance(groupMeet);
 
-
-        float[] distances = MainActivity.db.fetchDistances(visited.size());
-        for(int x = 0; x < distances.length; x++) {
-            map.addMarker(new MarkerOptions().position(list.get(x)).title("Distance away: " + distances[x]));
+        for(int x = 0; x < list.size(); x++) {
+            float[] res = new float[1];
+            Location.distanceBetween(GPSTracker.latitude, GPSTracker.longitude, groupMeet.latitude, groupMeet.longitude, res);
+            map.addMarker(new MarkerOptions().position(list.get(x)).title("Distance away: " + res[0]));
         }
-
-        //map.setMyLocationEnabled(true);
-        //map.setLocationSource(gps);
-
-
     }
 }
