@@ -32,7 +32,7 @@ public class SMSActivity extends Activity implements OnClickListener{
         mapScreen.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MapActivity.class));
+             //   startActivity(new Intent(getApplicationContext(), MapActivity.class));
             }
         }));
     }
@@ -40,7 +40,7 @@ public class SMSActivity extends Activity implements OnClickListener{
     public void onClick(View v) {
         String[] arr = ((EditText)
                 findViewById(R.id.editText)).getText().toString().split(",");
-        groupSize = arr.length;
+        groupSize = arr.length + 1;
         if(MainActivity.db == null) {
             MainActivity.db = new Database(groupSize);
         } else {

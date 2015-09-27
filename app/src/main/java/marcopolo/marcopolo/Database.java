@@ -1,5 +1,7 @@
 package marcopolo.marcopolo;
 
+import android.location.Location;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -107,6 +109,30 @@ public class Database {
         } catch(Exception e) {
             System.out.println(e.getStackTrace());
         }
-        return ans + 1;
+        return ans;
+    }
+    public void addDistance(LatLng dest) {
+        float[] res = new float[1];
+        Location.distanceBetween(GPSTracker.latitude, GPSTracker.longitude, dest.latitude, dest.longitude, res);
+        parse.put("Distance", res[0]);
+        parse.saveInBackground();
+    }
+    public float[] fetchDistances(int numDist) {
+        float[] distArr = new float[numDist];
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("testObject");
+        query.whereEqualTo("Code", code);
+        query.whereExists("Distance");
+        List<ParseObject> ans = null;
+        try {
+            ans = query.find();
+        } catch(Exception e) {
+            System.out.println(e.getStackTrace());
+        }
+        int counter = 0;
+        for(ParseObject o: ans) {
+            distArr[counter++] = Float.parseFloat(o.get("Distance") + "");
+        }
+        return distArr;
+
     }
 }
