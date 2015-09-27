@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class SMSActivity extends Activity implements OnClickListener{
 
     Button mapScreen;
+    public static int groupSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,29 +36,33 @@ public class SMSActivity extends Activity implements OnClickListener{
             }
         }));
     }
+
     public void onClick(View v) {
         String[] arr = ((EditText)
                 findViewById(R.id.editText)).getText().toString().split(",");
+        groupSize = arr.length;
+        if(MainActivity.db == null) {
+            MainActivity.db = new Database(groupSize);
+        } else {
+            startActivity(new Intent(getApplicationContext(), GoogleMaps.class));
+        }
         for(String phoneNumber:arr) {
             try {
-                SmsManager.getDefault().sendTextMessage(phoneNumber, null, "Your Marco Polo Code is:G45XXXYY"
+                SmsManager.getDefault().sendTextMessage(phoneNumber, null,
+                        "Your Marco Polo Code is: " + MainActivity.db.getCode()
                         , null, null);
             } catch (Exception e) {
                 AlertDialog.Builder alertDialogBuilder = new
                         AlertDialog.Builder(this);
                 AlertDialog dialog = alertDialogBuilder.create();
-
-
                 dialog.setMessage(e.getMessage());
-
-
                 dialog.show();
 
             }
         }
         startActivity(new Intent(getApplicationContext(), GoogleMaps.class));
-
     }
+
     public ArrayList<String> parseNumbers(String numbers) {
         SmsManager s = SmsManager.getDefault();
         return s.divideMessage(numbers);

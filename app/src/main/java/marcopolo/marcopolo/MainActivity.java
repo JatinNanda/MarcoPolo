@@ -9,12 +9,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.parse.Parse;
-import com.parse.ParseObject;
 
 public class MainActivity extends ActionBarActivity {
 
     protected Button smsScreen;
     protected Button joinButton;
+    public static Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +23,6 @@ public class MainActivity extends ActionBarActivity {
         Parse.enableLocalDatastore(this);
 
         Parse.initialize(this, "CJlO41ySg6ratzskNwDVNzBManCyHcwSRRG6vT3y", "gGLoy9UFLR5XHEm8cFAlen0BRVIM7DNTYEHaA2gx");
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();
         setContentView(R.layout.activity_main);
         smsScreen = (Button) findViewById(R.id.smsScreen);
         smsScreen.setOnClickListener((new View.OnClickListener() {
@@ -65,4 +62,5 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
