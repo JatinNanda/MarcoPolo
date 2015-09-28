@@ -28,13 +28,6 @@ public class SMSActivity extends Activity implements OnClickListener{
 
         findViewById(R.id.sendbutton).setOnClickListener(this);
 
-        mapScreen = (Button) findViewById(R.id.mapScreen);
-        mapScreen.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-             //   startActivity(new Intent(getApplicationContext(), MapActivity.class));
-            }
-        }));
     }
 
     public void onClick(View v) {
