@@ -12,7 +12,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GoogleMaps extends FragmentActivity implements OnMapReadyCallback {
@@ -45,7 +44,7 @@ public class GoogleMaps extends FragmentActivity implements OnMapReadyCallback {
 
         for(int x = 0; x < list.size(); x++) {
             float[] res = new float[1];
-            Location.distanceBetween(GPSTracker.latitude, GPSTracker.longitude, groupMeet.latitude, groupMeet.longitude, res);
+            Location.distanceBetween(list.get(x).latitude, list.get(x).longitude, groupMeet.latitude, groupMeet.longitude, res);
             map.addMarker(new MarkerOptions().position(list.get(x)).title("Distance away: " + res[0]));
         }
     }
