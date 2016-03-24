@@ -92,13 +92,6 @@ public class Database {
         }
         return ans;
     }
-    public static void setQueryData(List<ParseObject> list) {
-        a = list.size() > 0;
-        System.out.println("SIZE: " + list.size());
-    }
-    public static boolean getQueryData() {
-        return a;
-    }
     public int findGroupSize() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("testObject");
         query.whereEqualTo("Code", code);
